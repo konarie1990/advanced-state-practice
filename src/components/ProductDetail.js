@@ -1,9 +1,9 @@
 import React from "react";
 import Reviews from "./Reviews";
+import PropTypes from "prop-types";
 
 function ProductDetail(props) {
-  const { name, description, rating, imgUrl, reviews } = props.product;
-  // console.log(reviews);
+  const { name, description, rating, imgUrl, reviewsArray } = props.product;
   const stars = [];
   for (let i = 0; i < rating; i++) {
     stars.push(<span className="glyphicon glyphicon-star" />);
@@ -19,13 +19,18 @@ function ProductDetail(props) {
           </h4>
           <p>{description}</p>
         </div>
-        <Reviews render={product => <p>Hello {product.reviews}</p>} />
         <div className="ratings">
           <p className="pull-right">15 reviews</p>
           <p>{stars}</p>
+          <Reviews product={props.product} />
         </div>
       </div>
     </div>
   );
 }
+
+ProductDetail.propTypes = {
+  product: PropTypes.object
+};
+
 export default ProductDetail;
